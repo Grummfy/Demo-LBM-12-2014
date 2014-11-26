@@ -18,6 +18,9 @@ ClassLoader::addDirectories(array(
 	app_path().'/models',
 	app_path().'/database/seeds',
 
+	// add autoloading in path
+    app_path().'/lib'
+
 ));
 
 /*

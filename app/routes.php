@@ -25,7 +25,6 @@ Route::get('log', function()
 	<li><a href="/log/3">Playing with monolog handler</a></li>
 	<li><a href="/log/4">And formatters</a></li>
 	<li><a href="/log/5">And processors</a></li>
-	<li><a href=""></a></li>
 </ul>
 LOG;
 ;
