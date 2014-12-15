@@ -79,6 +79,9 @@ Route::get('log/3', function()
 	$monolog->pushHandler(new \Monolog\Handler\StreamHandler('php://stderr'));
 	// SyslogHandler
 
+	// to get the tocken go to :
+	//  1. https://api.slack.com/
+	//  2. "Get token"
 	$monolog->pushHandler(new \Monolog\Handler\SlackHandler('xoxp-3097227698-3097227702-3095751773-759a87', '#general'));
 
 	$monolog->pushHandler(new \Monolog\Handler\FirePHPHandler());
