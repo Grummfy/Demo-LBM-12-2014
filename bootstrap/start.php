@@ -70,6 +70,6 @@ require $framework.'/Illuminate/Foundation/start.php';
 |
 */
 
-$app['log.setup'] = 'LoggerConfiguration::configure';
+//$app['log.setup'] = $app['config']['log.setup'];
 
 return $app;
