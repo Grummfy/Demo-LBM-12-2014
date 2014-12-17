@@ -25,6 +25,7 @@ Route::get('log', function()
 	<li><a href="/log/3">Playing with monolog handler</a></li>
 	<li><a href="/log/4">And formatters</a></li>
 	<li><a href="/log/5">And processors</a></li>
+	<li><a href="/log/6">FingersCrossedHandler</a></li>
 </ul>
 LOG;
 ;
@@ -47,6 +48,7 @@ Route::get('log/1', function()
 
 Route::get('log/2', function()
 {
+	// specific to laravel, we have the listen method
 	Log::listen(function($level, $message, $context)
 	{
 		if ($level == \Psr\Log\LogLevel::INFO)
@@ -149,5 +151,30 @@ Route::get('log/5', function()
 	Log::critical(__FILE__ . '#' . __LINE__);
 	Log::info('My message with a context {data}', ['data' => 'Yihaaa']);
 
+	return '<hr />Hello logger<hr />';
+});
+
+
+
+
+Route::get('log/6', function()
+{
+	/* @var \Monolog\Logger $monolog */
+	$monolog = Log::getMonolog();
+
+	$crossFileHandler = new \Monolog\Handler\StreamHandler(storage_path().'/logs/crossedFinger.log', \Monolog\Logger::DEBUG);
+
+	$cross = new \Monolog\Handler\FingersCrossedHandler($crossFileHandler, \Monolog\Logger::ALERT);
+	$monolog->pushHandler($cross);
+
+
+	Log::debug(__FILE__ . '#' . __LINE__);
+	Log::debug(__FILE__ . '#' . __LINE__);
+	Log::critical(__FILE__ . '#' . __LINE__);
+	Log::info('My message with a context {data}', ['data' => 'Yihaaa']);
+
+	// uncoment to get log in crossedFinger.log
+//	Log::alert(__FILE__ . '#' . __LINE__);
+//	Log::emergency(__FILE__ . '#' . __LINE__);
 	return '<hr />Hello logger<hr />';
 });
